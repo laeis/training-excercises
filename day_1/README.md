@@ -5,12 +5,16 @@ scan array string
 use strings split to split numbers and Atoi
 add logic that counts the number of positive even numbers in the array and prints it.
 
+
+
 2)
 
 excercise 4539 1488 0343 6467
 1. Enter valid bank card number
 2. Validate it
 3. Print string with all strings covered except for the last 4
+
+
 
 3)
 
