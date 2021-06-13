@@ -1,4 +1,4 @@
-Write a function that parses given input data into 2 list of structs and sorts 
+Write a function that parses given input data into 2 list of structs and sorts them. Persons should be sorted by age and Country data should be sorted by City name length
 
 
 ```
