@@ -80,13 +80,6 @@ var jsonStr = []byte(`
 
 ```
 
-With the following structure
-
-```
-func solution(jsonStr []byte) (people []Person, places []Place) {
-    // your code
-}
-```
 
 1. Define structs to parse code into
 2. Define service struct with logger interface inside 
