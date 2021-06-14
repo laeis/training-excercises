@@ -1,7 +1,7 @@
 
 ***0***
 
-Print a chessboard with the specified dimensions of height and width, according to the example:
+Print a chessboard with the specified dimensions of height and width, according to the example 4 and 6:
 
 *  *  *  *  *  *
   *  *  *  *  *  *
