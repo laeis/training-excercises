@@ -3,14 +3,12 @@
 
 Print a chessboard with the specified dimensions of height and width, according to the example 4 and 6:
 
+```
 ^  ^  ^  ^  ^  ^
-
   ^  ^  ^  ^  ^  ^
-
 ^  ^  ^  ^  ^  ^
-
   ^  ^  ^  ^  ^  ^
-  
+```
 
 Input parameters: height, width, symbol to print
 Output: board
