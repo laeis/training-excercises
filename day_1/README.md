@@ -1,7 +1,31 @@
 
+How to read data from std input?
+```
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+	// when you hit enter - the data is read
+	scanner.Scan()
+	// this will read data from the scanner
+	yourData := scanner.Text()
+	// will print it to stdin
+	fmt.Println(yourData)
+}
+
+```
+
+Try to use it in your tasks
+
 ***0***
 
-Print a chessboard with the specified dimensions of height and width, according to the example 4 and 6:
+Print a chessboard with the specified dimensions of height and width, according to the example height - 4 and wigth 6:
 
 ```
 ^  ^  ^  ^  ^  ^
