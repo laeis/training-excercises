@@ -2,7 +2,7 @@ Write a function that parses given input data into 2 list of structs and sorts t
 Define service structure that will implement `HumanDecoder` interface. Inject into the service logger that implements our logger interface
 
 ```
-type HumanDecoder interface {
+type Decoder interface {
 	Decode(data []byte) ([]Person, []Place)
 	Sort(dataToSort interface{})
 
