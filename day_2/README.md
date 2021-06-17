@@ -1,45 +1,8 @@
-Write a function that parses given input data into 2 list of structs and sorts them. Persons should be sorted by age and Country data should be sorted by City name length
-Define service structure that will implement `HumanDecoder` interface. Inject into the service logger that implements our logger interface
+Write a program that parses given input data into 2 list of structs and sorts them. Persons should be sorted by age and Country data should be sorted by City name length
+Define service structure that will implement `Decoder` interface. Inject into the service logger that implements our logger interface
 
 ```
-type Decoder interface {
-	Decode(data []byte) ([]Person, []Place)
-	Sort(dataToSort interface{})
-
-	Print(interface{})
-	Printlen(persons []Person, places []Place)
-}
-
-type Logger interface {
-	Println(v ...interface{})
-	Fatalf(format string, v ...interface{})
-}
-
-type Service struct {
-	log Logger
-}
-
-func main() {
-    // logger to Inject 
-    logger := log.New(os.Stdout, "INFO: ", 0)
-	
-    
-    srv := NewService(logger)
-	persons, places := srv.Decode(jsonStr)
-
-	srv.Printlen(persons, places)
-
-	srv.Sort(persons)
-	srv.Sort(places)
-
-	srv.Print(persons)
-	srv.Print(places)
-}
-
-```
-
-```
-
+// Data to decode
 var jsonStr = []byte(`
 {
     "things": [
@@ -77,6 +40,33 @@ var jsonStr = []byte(`
         }
     ]
 }`)
+
+```
+
+```
+type Decoder interface {
+	Decode(data []byte) ([]Person, []Place)
+	Sort(dataToSort interface{})
+
+	Print(interface{})
+	Printlen(persons []Person, places []Place)
+}
+
+type Logger interface {
+	Println(v ...interface{})
+	Fatalf(format string, v ...interface{})
+}
+
+type Service struct {
+	log Logger
+}
+
+func main() {
+    // logger to Inject 
+    logger := log.New(os.Stdout, "INFO: ", 0)
+	
+   
+}
 
 ```
 
