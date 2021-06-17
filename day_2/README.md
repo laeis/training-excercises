@@ -65,6 +65,7 @@ func main() {
     // logger to Inject 
     logger := log.New(os.Stdout, "INFO: ", 0)
 	
+    // rest of the code
    
 }
 
