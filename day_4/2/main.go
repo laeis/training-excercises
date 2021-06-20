@@ -6,7 +6,7 @@
 //
 // Beginner Level: 10s max per request
 // Advanced Level: 10s max per user (accumulated)
-//
+// Hint: time.Ticker can be used
 
 package main
 
