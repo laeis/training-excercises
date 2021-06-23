@@ -15,7 +15,6 @@
 //	elapsed := t.Sub(start) // 1s or whatever time has passed
 
 
-
 package main
 
 // User defines the UserModel. Use this to check whether a User is a
