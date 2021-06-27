@@ -5,7 +5,7 @@ Write a concurrent web crawler that concurrently executes http requests and is t
 1. Create Worker function that perfroms requests and sends result into data channel.
 2. Create Reader function that reads []bytes from the request channel and performs search in string of bytes.
 3. Print which URL will contain the resulting data.
-4. Your functions should have a cancelation-listening mechanism. If a result is found - stop all the goroutines. (Use context for that)
+4. Your functions should have a cancelation-listening mechanism. If a result is found - stop all the goroutines and requests. (Use context and cancel func for that)
 
 
 The output should be smth like:
@@ -28,7 +28,6 @@ Get "https://twitter.com/concurrencyinc": context canceled
 Get "https://postman-echo.com/get": context canceled
 exiting from searcher...
 Get "https://www.google.com/": context canceled
-context canceled
 Get "http://localhost:8000": context canceled
 
 ```
