@@ -1,13 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
 )
-
 
 const stringToSearch = "concurrency"
 
@@ -23,7 +23,6 @@ var sites = []string{
 	"https://en.wikipedia.org/wiki/Concurrency_(computer_science)#:~:text=In%20computer%20science%2C%20concurrency%20is,without%20affecting%20the%20final%20outcome.",
 }
 
-
 type SiteData struct {
 	data []byte
 	uri  string
@@ -33,31 +32,58 @@ func main() {
 	ctx, cancel := context.WithCancel(context.TODO())
 	resultsCh := make(chan SiteData, len(sites))
 
-	// your code
+	go worker(ctx, resultsCh, sites)
 
+	go reader(cancel, resultsCh)
 	// give one second to validate if all other goroutines are closed
 	time.Sleep(time.Second)
 }
 
-/*
-	Code to make request and read data
-
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, uri, nil)
-	if err != nil {
-		fmt.Println(err)
-		return
+func worker(ctx context.Context, siteData chan SiteData, sites []string) {
+	for _, u := range sites {
+		go makeRequest(ctx, siteData, u)
 	}
+}
 
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
+func reader(cancel context.CancelFunc, siteDataChan chan SiteData) {
+	defer fmt.Println("exiting from searcher...")
+	for data := range siteDataChan {
+		if strings.Contains(string(data.data), stringToSearch) {
+			fmt.Printf("'%s' string is found in %s \n", stringToSearch, data.uri)
+			cancel()
+			return
+		} else {
+			fmt.Printf("Nothing found in  %s \n", data.uri)
+		}
 	}
+}
 
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
+func makeRequest(ctx context.Context, siteData chan SiteData, uri string) {
+	fmt.Printf("starting sending request to %s \n", uri)
+	select {
+	case <-ctx.Done():
+		fmt.Printf("Get %s : context canceled\n", uri)
+
+	default:
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, uri, nil)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		bodyBytes, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		siteData <- SiteData{
+			data: bodyBytes,
+			uri:  uri,
+		}
 	}
-
-/*
+}
